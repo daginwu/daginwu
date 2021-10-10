@@ -1,0 +1,61 @@
+syntax = "proto3";
+
+package slog;
+option go_package = "./pb";
+
+
+service Slog {
+    rpc CreateTransaction(Transaction) returns  (Reply) {};
+}
+
+message Reply {
+    string message = 1;
+    repeated bytes values = 2;
+}
+
+// Transaction
+
+
+enum TransactionType {
+    UNKNOWN = 0;
+    SINGLE_HOME = 1;
+    MULTI_HOME_OR_LOCK_ONLY = 2;
+}
+
+enum TransactionStatus {
+    NOT_STARTED = 0;
+    COMMITTED = 1;
+    ABORTED = 2;
+}
+
+enum OperationType {
+    GET = 0;
+    PUT = 1;
+    DELETE = 2;
+    SCAN  = 3;
+}
+
+message Range {
+    bytes upper_bound = 1;
+    bytes lower_bound = 2;
+}
+
+message Operation {
+    bytes key = 1;
+    bytes value = 2;
+    Range range =  3;
+    OperationType operation_type = 4; 
+}
+
+message Transaction {
+    TransactionType transaction_type = 1;
+    TransactionStatus transaction_status = 2;
+    repeated Operation operations = 3;
+    repeated bytes read_set = 4;
+    repeated bytes write_set = 5;
+    repeated bytes read_write_set = 6;
+    repeated int32 readers = 7;
+    repeated int32 writers = 8;
+}
+
+
