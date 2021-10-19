@@ -5,7 +5,7 @@ option go_package = "./pb";
 
 
 service Slog {
-    rpc CreateTransaction(Transaction) returns  (Reply) {};
+    rpc ReceiveNewTxn(Transaction) returns  (Reply) {};
 }
 
 message Reply {

@@ -26,7 +26,7 @@ func InitServer(address string) {
 
 }
 
-func (server *Server) CreateTransaction(ctx context.Context, txn *pb.Transaction) (*pb.Reply, error) {
+func (server *Server) ReceiveNewTxn(ctx context.Context, txn *pb.Transaction) (*pb.Reply, error) {
 
 	return &pb.Reply{}, nil
 }

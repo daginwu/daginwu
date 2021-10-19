@@ -13,6 +13,14 @@ type Config struct {
 type LocalLog struct {
 }
 
+func LocalLogInit() *LocalLog {
+	return &LocalLog{}
+}
+
+func (log *LocalLog) InsertIntoLocalLog(txn *pb.Transaction) {
+
+}
+
 type GlobalLog struct {
 }
 
